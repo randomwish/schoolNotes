@@ -1,10 +1,12 @@
 //Very scuffed, brief notes
 //Will probably clean it up after finals or something
-Causality (UTC 2729)
 
-Heavily adopted from Causal Inference: The Mixtape (Cunningham, 2021) https://mixtape.scunning.com/
+**Causality (UTC 2729) AY23/24 S2**
 
-Directed Acyclic graphs
+**Heavily adopted from Causal Inference: The Mixtape (Cunningham, 2021) https://mixtape.scunning.com/**
+
+**Directed Acyclic graphs**
+
 Describe all causal relationships relevant to the effect of D on Y
 Graphical representation of a chain of causal effects
 Arrows -> causal effect b between two random variables
@@ -68,12 +70,15 @@ Randomization inference -> standard errors are justified, uncomfortable appealin
 Fisher’s sharp null -> no unit in the data had a causal effect
 
 
-Matching
-Conditional independence assumption -> randomisation occured only conditional on observable characteristics (expected VALUES OF y^1 AND y^0 are equal for treatment and control group for each value of X)
+**Matching**
+
+**Conditional independence assumption** -> randomisation occured only conditional on observable characteristics (expected VALUES OF y^1 AND y^0 are equal for treatment and control group for each value of X)
 CIA -> condition strategy satisfies backdoor criterion and is a situation of selection on observables
 Covariate -> a variable that satisfies the backdoor criterion, and is usually a random variable assigned to individual units prior to treatment (MUST NOT BE a collider)
 
-To estimate a causal effect, need 1) CIA and 2) probability of treatment to be between 0 and 1 for each strata (notion of common support)
+To estimate a causal effect, need 
+1) CIA and
+2) probability of treatment to be between 0 and 1 for each strata (notion of common support)
 
 Example: Whether or not being in first class made someone more likely to survive
 Potential confounder: women and children are more likely to be in firs class
@@ -85,7 +90,8 @@ Matching -> estimate outcome by inputting potential outcomes by conditioning on 
 Notion of exchangeable -> covariate is balanced (mean of the covariates are the same)
 
 
-Regression Discontinuity
+**Regression Discontinuity**
+
 Eliminate selection bias with an assignment variable X, an observable confounder
 Estimate potential outcomes change smoothly as a function of the running variable through cutoff; only thing that causes the outcome to change abruptly at the cutoff variable is the treatment
 Causal effects can be identified through units whose score is in a close neighbourhood around some cutoff
@@ -102,14 +108,16 @@ Local Average Treatment Effect -> local because it is only for running variables
 Continuity assumption -> expected outcomes would be continuous even across the cutoff threshold if there had been no treatment (rules out omitted variable bias at the cut off)
 
 Challenges -> 
-violations to RDD include
+violations to RDD include:
+
 1. Assignment rule known in advance
 2. Agents are interested in adjusting
 3. Agents have time to adjust
 4. Cutoff is endogenous to factors that independently cause potential outcomes to shift
 5. Non random distribution of the running variable
 
-Instrumental Variables
+**Instrumental Variables**
+
 Typically used to address omitted variable bias, measurement error and simultaneity
 Given a backdoor path between D and Y, U, which is assumed to be unobserved
 D <- U -> Y and Z -> D -> Y
@@ -120,6 +128,7 @@ Hypothetical situation -> D consists of people making choices, and sometimes the
 Ideas: 1) if treatment effects are heterogenous, Z shock would only identify some causal effect of D on Y (only know effect of compliers)
 2. If Z is inducing some of the change in Y via a portion, we have lesser data to identify the causal effect (larger standard errors)
 Requirements:
+
 1. Exclusion restriction path -> instrumental variable only affects exposure of interest
 2. Z is correlated with D and thus correlated to Y. (Z to D is known as first stage, D to Y is second stage, Z to Y is known as reduced form)
 
@@ -140,7 +149,8 @@ Popular IV design: Lottery, Judge fixed effects design, Bartik Instruments
 Lottery - randomised trials - whether one was offered treatments
 
 
-Differences in differences design
+**Differences in differences design**
+
 Idea is to find an instance where a consequential treatment was given to some people but denied to others -> also known as a natural experiment because it is based on naturally occurring variation in a treatment variable that affects only some units over timem
 
 Why not ATE -> ATE only works if treatment had been randomised, but choices made are endogenous to potential outcomes (people would choose what is most beneficial for them)

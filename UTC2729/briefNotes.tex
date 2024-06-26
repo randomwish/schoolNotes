@@ -1,0 +1,213 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\title{Causality (UTC 2729)}
+\author{Wee Yen Zhe}
+\date{AY23/24 S2}
+
+\begin{document}
+\maketitle
+
+\section*{Directed Acyclic Graphs}
+Directed Acyclic Graphs (DAGs) describe all causal relationships relevant to the effect of \(D\) on \(Y\). They provide a graphical representation of a chain of causal effects.
+\begin{itemize}
+    \item Arrows (\(\rightarrow\)) represent causal effects between two random variables.
+    \item \(D \rightarrow Y\) (direct effect).
+    \item \(D \rightarrow X \rightarrow Y\) (mediator), capturing a sequence of events originating with \(D\).
+    \item Backdoor path: \(D \leftarrow X \rightarrow Y\) (confounder), as \(X\) jointly determines \(D\) and \(Y\).
+\end{itemize}
+
+If there are no colliders along backdoor paths, then it is an open backdoor path (introduces bias and creates non-causal correlation). To close an open backdoor path:
+\begin{enumerate}
+    \item Condition on the confounder.
+    \item Create a collider along the backdoor path.
+\end{enumerate}
+No backdoor paths satisfy the backdoor criterion that isolates a causal effect.
+
+\begin{itemize}
+    \item \(D \rightarrow X \leftarrow Y\) (Collider) closes a backdoor path.
+    \item Do not control for colliders, as it may open up a backdoor path.
+\end{itemize}
+
+\subsection*{Collider Bias}
+Collider bias results from bad controls and selection bias. Bad controls occur when the outcome has been a collider linking treatment to the outcome of interest (e.g., \(D \rightarrow O \leftarrow A \rightarrow Y\)).
+
+\section*{5 Methods for Causation}
+\begin{enumerate}
+    \item Method of agreement.
+    \item Method of difference (similar to the idea of causation and comparison among counterfactuals).
+    \item Joint method.
+    \item Method of concomitant variation.
+    \item Method of residuals.
+\end{enumerate}
+
+\subsection*{Potential Outcomes}
+The causal effect is defined as a comparison between two states of the world: actual vs. counterfactual; it expresses causality in terms of counterfactuals. Treat \(i\) for a unit \(Y\).
+
+\begin{itemize}
+    \item \(Y^0\): potential outcome of a unit not receiving treatment.
+    \item \(Y^1\): potential outcome of a unit receiving treatment.
+\end{itemize}
+
+Switching equation:
+\[
+Y_i = D_i Y_i^1 + (1 - D_i) Y_i^0
+\]
+Where \(D_i\) is 1 if the unit receives treatment and 0 if it does not.
+\begin{itemize}
+    \item \(Y_i = Y_i^1\) if the unit receives treatment.
+    \item \(Y_i = Y_i^0\) if the unit does not receive treatment.
+\end{itemize}
+Causal effect:
+\[
+Y_i^1 - Y_i^0
+\]
+
+\subsection*{Average Treatment Effect (ATE)}
+The expected value of the causal effect \(\mathbb{E}[Y_i^1 - Y_i^0]\), can be estimated as:
+\[
+ATE = p \cdot ATT + (1 - p) \cdot ATU
+\]
+\begin{itemize}
+    \item Average Treatment Effect for the Treatment group (ATT): population mean treatment effect for the group of units assigned the treatment in the first place.
+    \[
+    ATT = \mathbb{E}[\theta_i | D_i = 1] = \mathbb{E}[Y_i^1 | D_i = 1] - \mathbb{E}[Y_i^0 | D_i = 1]
+    \]
+    \item Average Treatment Effect for the Control group (ATU): population mean treatment effect for units assigned to the control group.
+    \[
+    ATU = \mathbb{E}[\theta_i | D_i = 0] = \mathbb{E}[Y_i^1 | D_i = 0] - \mathbb{E}[Y_i^0 | D_i = 0]
+    \]
+\end{itemize}
+
+Simple difference in means:
+\[
+\mathbb{E}[Y^1 | D = 1] - \mathbb{E}[Y^0 | D = 0]
+\]
+
+\subsection*{Selection Bias}
+Selection bias refers to inherent bias between the treated and untreated groups if both groups did not receive treatment.
+
+\subsection*{Heterogeneous Treatment Effect Bias}
+Heterogeneous treatment effect bias represents the different returns one can obtain from the treatment group for the two groups, multiplied by the share of the population that is in the untreated group.
+
+\subsection*{Independence Assumption}
+The independence assumption implies that treatment was given randomly to two parties with no regard to potential outcomes for an individual. Check for independence by ensuring the mean potential outcome for both treated and untreated groups is the same for both groups. This can eliminate both selection bias and heterogeneous treatment effect bias.
+
+\begin{itemize}
+    \item Independence: two groups of units have the same potential outcome on average in the population.
+    \[
+    \mathbb{E}[Y^1 | D=1] - \mathbb{E}[Y^1 | D = 0] = 0
+    \]
+    \[
+    \mathbb{E}[Y^0 | D = 1] - \mathbb{E}[Y^0 | D = 0] = 0
+    \]
+\end{itemize}
+
+\subsection*{Stable Unit Treatment Value Assumption (SUTVA)}
+SUTVA assumes that the potential outcomes for each treated unit are the same homogeneous doses.
+
+\subsection*{Randomization Inference}
+Randomization inference justifies standard errors and appeals to the large sample properties of an estimator. Fisher's sharp null hypothesis states that no unit in the data had a causal effect.
+
+\section*{Matching}
+\subsection*{Conditional Independence Assumption (CIA)}
+CIA implies that randomization occurred only conditional on observable characteristics. The expected values of \(Y^1\) and \(Y^0\) are equal for the treatment and control groups for each value of \(X\).
+
+\begin{itemize}
+    \item CIA conditions satisfy the backdoor criterion and represent a situation of selection on observables.
+    \item Covariate: a variable that satisfies the backdoor criterion and is usually a random variable assigned to individual units before treatment (must not be a collider).
+\end{itemize}
+
+To estimate a causal effect, need:
+\begin{enumerate}
+    \item CIA
+    \item Probability of treatment to be between 0 and 1 for each stratum (common support)
+\end{enumerate}
+
+Example: Whether or not being in first class made someone more likely to survive the Titanic incident. Potential confounder: women and children are more likely to be in first class. Solution: use age and gender to close backdoor paths and satisfy the backdoor criterion.
+
+\subsection*{Curse of Dimensionality}
+If we condition on too specific a stratum, we may not have the specific examples required (specific age, gender, and class of room).
+
+\subsection*{Matching}
+Matching estimates the outcome by inputting potential outcomes by conditioning on confounding, observed covariates (filling in missing potential outcomes for each treatment unit using the closest control group unit to the treatment group unit for a confounder variable).
+
+\subsection*{Notion of Exchangeability}
+A covariate is balanced when the mean of the covariates is the same.
+
+\section*{Regression Discontinuity (RD)}
+RD eliminates selection bias with an assignment variable \(X\), an observable confounder. Estimate potential outcomes change smoothly as a function of the running variable through the cutoff. The only thing that causes the outcome to change abruptly at the cutoff variable is the treatment.
+
+\begin{itemize}
+    \item Causal effects can be identified through units whose scores are in a close neighborhood around some cutoff.
+    \item Compare people above and below the cutoff, then estimate the local average treatment effect as we do not have common support (extrapolation required).
+    \item Running variable: refers to the assignment variable itself (has to be quantitative).
+\end{itemize}
+
+\subsection*{Sharp RD}
+The probability of treatment goes from 0 to 1 at the cutoff; treatment is deterministic. Sharp RD estimation can be interpreted as the average causal effect of the treatment as the running variable approaches the cutoff in the limit.
+
+\subsection*{Fuzzy RD}
+The probability of treatment discontinuously increases at the cutoff; treatment is probabilistic.
+
+\subsection*{Local Average Treatment Effect}
+Local because it is only for running variables near the cutoff. The continuity assumption implies expected outcomes would be continuous even across the cutoff threshold if there had been no treatment (rules out omitted variable bias at the cutoff).
+
+\subsection*{Challenges}
+Violations to RD include:
+\begin{enumerate}
+    \item Assignment rule known in advance.
+    \item Agents are interested in adjusting.
+    \item Agents have time to adjust.
+    \item Cutoff is endogenous to factors that independently cause potential outcomes to shift.
+    \item Non-random distribution of the running variable.
+\end{enumerate}
+
+\section*{Instrumental Variables (IV)}
+Typically used to address omitted variable bias, measurement error, and simultaneity. Given a backdoor path between \(D\) and \(Y\), \(U\), which is assumed to be unobserved: \(D \leftarrow U \rightarrow Y\) and \(Z \rightarrow D \rightarrow Y\).
+
+When \(Z\) varies, \(D\) varies, which causes \(Y\) to change. \(Y\) is only varying because \(D\) has varied - \(Z\) affects \(Y\) only through \(D\).
+
+\begin{itemize}
+    \item Hypothetical situation: \(D\) consists of people making choices, and sometimes these choices affect \(Y\) and sometimes these are merely correlated with changes in \(Y\) due to unobserved changes in \(U\). \(Z\) then induces a shock to some people in \(D\) to make different decisions. Then, we can observe the causal effect of \(D\) on \(Y\) for this subgroup of people (``compliers'').
+\end{itemize}
+
+\subsection*{Requirements for IV Strategy}
+\begin{enumerate}
+    \item Stable unit treatment value assumption: potential outcomes for each person are unrelated to treatment status of other individuals.
+    \item Independence assumption: ``as good as random assignment'' assumption (IV is independent of potential outcomes and potential treatment assignments).
+    \item Exclusion restriction: any effect of \(Z\) on \(Y\) must be via effect of \(Z\) on \(D\).
+    \item First stage: \(Z\) has to have a statistically significant effect on average probability of treatment.
+    \item Monotonicity assumption: IV operates in the same direction on all individual units (guarantees a weighted average of the underlying causal effects of the affected group).
+\end{enumerate}
+
+\subsection*{Local Average Treatment Effect (LATE)}
+The average causal effect of \(D\) on \(Y\) for those whose treatment status was changed by instrument \(Z\) (only measures causal effect of compliers in heterogeneous treatment effects). For homogeneous treatment effects, compliers would have had the same treatment effects as non-compliers.
+
+\subsection*{Popular IV Designs}
+\begin{itemize}
+    \item Lottery.
+    \item Judge fixed effects design.
+    \item Bartik instruments.
+\end{itemize}
+Lottery: randomized trials - whether one was offered treatments.
+
+\section*{Differences in Differences (DiD) Design}
+The idea is to find an instance where a consequential treatment was given to some people but denied to others - also known as a natural experiment because it is based on naturally occurring variation in a treatment variable that affects only some units over time.
+
+\begin{itemize}
+    \item Why not ATE: ATE only works if treatment had been randomized, but choices made are endogenous to potential outcomes (people would choose what is most beneficial for them).
+    \item Works on two pertinent differences: simple before-and-after difference (eliminates unit-specific fixed effects), and then differences the differences from the two groups (hence the term, difference in differences).
+\end{itemize}
+
+\subsection*{Parallel Trends Assumption}
+DiD only works with the parallel trends assumption - the idea that there are no unobserved factors that could also lead to a change in the outcome, and that the only change is in the intervention to a variable. DiD would simplify to ATT if the expected difference in outcome for both groups (treated and non-treated) over a period of time is zero had both groups not been treated (arisen from selection bias).
+
+\subsection*{Triple Differences}
+Inclusion of variable-specific time change to the original ``generic'' intervention change.
+
+\subsection*{Two-way Fixed Effects with Differential Timing}
+Units receive treatments at different points in time.
+
+\end{document}

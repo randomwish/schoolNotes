@@ -1,0 +1,105 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Source: Dave Richeson (divisbyzero.com), Dickinson College
+% Version francaise par Vincent Pantaloni, prof.pantaloni.free.fr
+% Traduction, correction et adaptation à la typographie française.
+% 
+% Une anti-seche en deux pages pour une intro rapide ou un aide mémoire des différentes fonctions. A imprimer en recto verso par exemple.
+%
+% Feel free to distribute this example, but please keep the referral
+% to divisbyzero.com
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,10pt,landscape]{article}
+\usepackage{fontspec}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb,amsmath,amsthm,amsfonts}
+\usepackage{multicol,multirow}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref}
+
+
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+	}
+\pagestyle{empty}
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+% -----------------------------------------------------------------------
+
+\begin{document}
+
+\raggedright
+\footnotesize
+
+\begin{center}
+    {\Large\textbf{CS2106 Cheatsheet by randomwish}}\\[0.5em]
+    \url{https://github.com/randomwish/schoolNotes}
+\end{center}
+\begin{multicols}{3}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\section{Operating Systems}
+Is a program that acts as an \textbf{intermediary} between a computer user and computer hardware
+\subsection{Types of Operating Systems}
+\begin{itemize}
+    \item No OS $\rightarrow$ direct interaction between program and hardware; any changes has to be done to the hardware (+ $\rightarrow$ minimal overhead; - > not portable and inefficient)
+    \item Batch OS $\rightarrow$ executes user programs one at a time (loads job from media $\rightarrow$ executes job $\rightarrow$ collect results) (- $\rightarrow$ CPU idle when performing I/O; possible improvement is multiprogramming)
+    \item Time-Sharing OS $\rightarrow$ allows multiple users to interact with machine using terminals; OS manages sharing of CPU time and storage; \textbf{virtualization} of hardware is involved (each program executes as if it has all resources to itself)
+\end{itemize}
+\subsection{Purpose for OS}
+\begin{itemize}
+    \item Abstraction $\rightarrow$ hide low level details, perform tasks through OS such that user can perform common high level functionality
+    \item Resource allocator $\rightarrow$ manages resources available and arbitrate conflicting requests
+    \item Control Program $\rightarrow$ controls execution of programs to prevent errors and provide security
+\end{itemize}
+\subsection{Structure of an OS}
+OS (also known as the kernel) would run in \textbf{kernel mode} $\rightarrow$ complete access to hardware resources. Kernel code \textbf{cannot} use syetm calls, cannot use normal libraries, and no normal I/O. Other software would then run in \textbf{user mode}, where it has limited access to hardware resources. 
+Invocation of OS: 
+\begin{itemize}
+    \item Hardware $\leftrightarrow$ OS: OS executing machine instructions
+    \item OS $\leftrightarrow$ User Programs and OS $\leftrightarrow$ Library: OS called using system call interface
+\end{itemize}
+Ways to structure an OS:
+\begin{itemize}
+    \item Monolithic $\rightarrow$ kernel is one big special program, where services are integral (Advantages: well understood and performance; disadvantages: coupled components and possible complications)
+    \item Microkernel $\rightarrow$ kernel is small and clean, only provides basic and essential features (Inter Process Communication, Address Space management and thread management); higher level services are run as server process outside of OS $\rightarrow$ uses IPC to communicate (Advantages: kernel is robust, extensible, and better isolation and protection between kernel and high level; disadvantages: lower performance
+    \item Layered System $\rightarrow$ seen as a generalization of monolithic system, where components are organised in hierarchy of layers
+    \item client server model $\rightarrow$ variation of microkernel; client process request service from server process and server process is built on top of microkernel
+\end{itemize}
+
+\subsection{Virtual machines} (also known as a \textbf{hypervisor}): seen as a software emulation of hardware, where it provides illusion of complete hardware
+Types of hypervisors:
+\begin{itemize}
+    \item Type 1 Hypervisor $\rightarrow$ provides individual virtual machines to guest OSes (idea is that it provides direct linkage to the hardware, hardware $\leftrightarrow$ hypervisor $\leftrightarrow$ guest OS)
+    \item Type 2 Hypervisor $\rightarrow$ runs in host OS, and the guest OS would then be run in the virtual machine (idea is that it is the intermediary between guest OS and the host operating system, hardware $\leftrightarrow$ host operating system $\leftrightarrow$ type 2 hypervisor)
+\end{itemize}
+
+\end{multicols}
+
+\end{document}

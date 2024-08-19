@@ -1,0 +1,190 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Source: Dave Richeson (divisbyzero.com), Dickinson College
+% Version francaise par Vincent Pantaloni, prof.pantaloni.free.fr
+% Traduction, correction et adaptation à la typographie française.
+% 
+% Une anti-seche en deux pages pour une intro rapide ou un aide mémoire des différentes fonctions. A imprimer en recto verso par exemple.
+%
+% Feel free to distribute this example, but please keep the referral
+% to divisbyzero.com
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,10pt,landscape]{article}
+\usepackage{fontspec}
+\usepackage{amssymb,amsmath,amsthm,amsfonts}
+\usepackage{multicol,multirow}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage{microtype}
+\usepackage{url}
+\usepackage[landscape]{geometry}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+
+% Define custom colors
+\definecolor{warningyellow}{RGB}{255,204,0}
+\definecolor{warningred}{RGB}{204,0,0}
+
+% Create a new tcolorbox style for warnings
+\newtcolorbox{warningbox}[1][]{%
+  enhanced,
+  colback=warningyellow!10,
+  colframe=warningred,
+  boxrule=1pt,
+  title=Warning,
+  fonttitle=\bfseries,
+  coltitle=white,
+  top=2mm,
+  bottom=2mm,
+  left=2mm,
+  right=2mm,
+  arc=1mm,
+  title style={top color=warningred,bottom color=warningred},
+  #1
+}
+\usetikzlibrary{arrows.meta}
+
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+    }
+\pagestyle{empty}
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+% -----------------------------------------------------------------------
+
+\begin{document}
+
+\raggedright
+\footnotesize
+
+\begin{center}
+    {\Large\textbf{PC1101 Cheatsheet, by randomwish}}\\[0.5em]
+    \url{https://github.com/randomwish/schoolNotes}
+\end{center}
+\begin{multicols}{3}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\section{1. Intro to light}
+\subsection{Preliminaries}
+\subsubsection{Electromagnetic field and Maxwell's equations}
+Nomenclature
+\begin{itemize}
+    \item $\vec{E}$: direction along which a charged particle is pushed (polar vector). Perpendicular to direction of propagation.
+    \item $\vec{D}$: electric displacement field.
+    \item $\vec{H}$: magnetic field.
+    \item $\vec{B}$: axis around which a charged particle will rotate (axial vector). Perpendicular to both $\vec{E}$ and direction of propagation.
+    \item $\nabla$: derivatives with respect to spatial coordinates.
+    \item $\rho$: charge density.
+    \item $\vec{j}$: current density.
+\end{itemize}
+
+Equations
+\begin{itemize}
+    \item $\vec{\nabla} \times \vec{E}(\vec{x}, t) + \partial_{t} \vec{B}(\vec{x}, t) = 0$
+    \begin{itemize}
+        \item $\vec{E}$ circulates around any region where $\vec{B}$ is changing with time.
+    \end{itemize}
+    \item $\vec{\nabla} \cdot \vec{B}(\vec{x},t) = 0$
+    \begin{itemize}
+        \item No magnetic monopoles; net outflow of $\vec{B}$ is zero.
+    \end{itemize}
+    \item $\vec{\nabla} \cdot \vec{D}(\vec{x},t) = \rho(\vec{x},t)$
+    \begin{itemize}
+        \item The electric displacement field $\vec{D}$ relates to charge density.
+    \end{itemize}
+    \item $\vec{\nabla} \times \vec{H}(\vec{x},t) - \partial_{t} \vec{D}(\vec{x},t) = \vec{j}(\vec{x},t)$
+    \begin{itemize}
+        \item Describes the circulation of $\vec{H}$ around a current density $\vec{j}$ and the time derivative of $\vec{D}$.
+    \end{itemize}
+\end{itemize}
+
+\subsection{E-m field with matter}
+\subsubsection{Forces on charged particle}
+In addition to factoring in Newton's equation with electric and Lorentz forces, include the Abraham-Lorentz force, which accounts for the energy radiated by an accelerated charge.
+
+\subsubsection{Interaction with a molecule}
+An electric dipole arises when positive and negative charges move in opposite directions, causing the centers of mass of both clouds to not overlap.
+
+When an electric field oscillates, the dipole oscillates at the same frequency, emitting a wave at that frequency and scattering in all directions. Electrons are stable only in specific energy states. The energy difference between two states, $\Delta E_{jk} = E_j - E_k$, corresponds to a frequency via the relation
+\[
+\Delta E_{jk} = h\nu_{jk} = \hbar \omega_{jk},
+\]
+where $h$ is Planck's constant.
+
+\subsubsection{Interaction with solids}
+In dielectric materials, such as glass (where electrons are bound to their atoms), light scattered by each atom remains in phase with the light scattered by other atoms. As a result, light passing through the material continues to propagate in a coherent direction.
+
+\section{Frequency}
+The dispersion relation is given by $\lambda v = c$, where $c$ is the speed of light in vacuum ($3 \times 10^8$ m/s). Humans can perceive light only when its wavelength lies within the visible spectrum.
+
+\section{2. Monochromatic Waves}
+Monochromatic: single color $\rightarrow$ wave has a single frequency.
+\begin{itemize}
+    \item Frequency $v$: units in Hz.
+    \item Phase $\varphi$: only matters if there are two or more waves (relative phase).
+    \item Pulsation $\omega = 2 \pi v$: units in rad/s.
+    \item Time dependence: $\cos(2\pi v t + \varphi) \equiv \cos(\omega t + \varphi)$.
+    \item Conversion: $\sin(\theta) = \cos(\theta - \frac{\pi}{2})$.
+\end{itemize}
+
+\subsection{Space Dependence}
+\subsubsection{1D Monochromatic Waves}
+We represent space as $x - ct$, where $t$ represents time coordinates.
+
+Space and time dependence of a 1D monochromatic wave:
+\[
+\cos(kx - \omega t + \varphi),
+\]
+where $k$ is the wave number:
+\[
+k = \frac{\omega}{c} = \frac{2\pi}{\lambda}.
+\]
+The minus sign indicates that the wave moves to the right (positive direction).
+
+\subsubsection{3D Monochromatic Waves}
+\begin{itemize}
+    \item \textbf{Plane wave}: $\cos(\vec{k}\cdot\vec{x} - \omega t + \varphi)$.
+    \begin{itemize}
+        \item Wavefronts are planes; propagates eternally from $-\infty$ to $\infty$ in the direction $\hat{e_k}$.
+        \item The space vibrates in unison in the perpendicular direction to $\hat{e_k}$.
+    \end{itemize}
+    \item \textbf{Spherical wave}: 
+    \[
+    \frac{1}{r(\vec{x})} \cos(kr(\vec{x}) - \omega t + \varphi),
+    \]
+    where $k$ is the wave number and $r(\vec{x})$ is the distance of $\vec{x}$ from the center $\vec{x_0}$ where the wave originates.
+    \[
+    r(\vec{x}) = \sqrt{(x - x_0)^2 + (y - y_0)^2 + (z - z_0)^2}
+    \]
+    \item wave fronts are surfaces of constant $r$, or spheres centered at $\vec{x_0}$
+\end{itemize}
+
+\end{multicols}
+\end{document}

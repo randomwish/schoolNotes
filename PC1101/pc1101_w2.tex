@@ -51,10 +51,10 @@
 
 \ifthenelse{\lengthtest { \paperwidth = 11in}}
     { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
-    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
-        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
-        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
-    }
+	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+	}
 \pagestyle{empty}
 \makeatletter
 \renewcommand{\section}{\@startsection{section}{1}{0mm}%
@@ -134,7 +134,7 @@ An electric dipole arises when positive and negative charges move in opposite di
 
 When an electric field oscillates, the dipole oscillates at the same frequency, emitting a wave at that frequency and scattering in all directions. Electrons are stable only in specific energy states. The energy difference between two states, $\Delta E_{jk} = E_j - E_k$, corresponds to a frequency via the relation
 \[
-\Delta E_{jk} = h\nu_{jk} = \hbar \omega_{jk},
+\Delta E_{jk} = h\nu_{jk} - \hbar \omega_{jk},
 \]
 where $h$ is Planck's constant.
 
@@ -186,5 +186,143 @@ The minus sign indicates that the wave moves to the right (positive direction).
     \item wave fronts are surfaces of constant $r$, or spheres centered at $\vec{x_0}$
 \end{itemize}
 
+\subsection{Electric Field Representation}
+
+To represent light as an electromagnetic wave, we need to add:
+
+1. Amplitude $E_0$: Gives the wave units of electric field (V/m) and describes how large the field is.
+
+2. Polarization: Direction of oscillation of the electric field vector.
+
+For a monochromatic plane wave propagating along $\hat{e_z}$:
+
+\subsubsection{Linear Polarization}
+
+\[
+\vec{E}(\vec{x},t) = E_0 \hat{e}_\theta \cos(kz - \omega t)
+\]
+
+Where $\hat{e}_\theta \equiv \cos\theta\hat{e}_x + \sin\theta\hat{e}_y$
+
+\subsubsection{Circular Polarization} 
+
+\[
+\vec{E}(\vec{x},t) = E_0[\cos(kz - \omega t)\hat{e}_\theta \pm \sin(kz - \omega t)\hat{e}_{\theta+\pi/2}]
+\]
+
++ sign: right-handed polarization
+- sign: left-handed polarization
+
+\subsubsection{Elliptical Polarization}
+
+Most general form:
+
+\[
+\vec{E}(\vec{x},t) = E_0[\cos(kz - \omega t)\hat{e}_\theta + \cos(kz - \omega t + \phi)\hat{e}_{\theta+\pi/2}]
+\]
+
+\subsection{Intensity}
+
+Intensity at position $\vec{x}$ and time $t$:
+
+\[
+I(\vec{x},t) = \vec{E}(\vec{x},t) \cdot \vec{E}(\vec{x},t) \equiv ||\vec{E}(\vec{x},t)||^2
+\]
+
+Energy density in vacuum:
+
+\[
+u(\vec{x},t) = \frac{1}{2}\epsilon_0(||\vec{E}(\vec{x},t)||^2 + c^2||\vec{B}(\vec{x},t)||^2) \equiv \epsilon_0 I(\vec{x},t)
+\]
+
+\subsection{Complex Notation}
+
+Physicists often use complex numbers for calculations:
+
+\[
+e^{i\theta} = \cos\theta + i\sin\theta
+\]
+
+Advantages:
+- Adding phase is multiplication: $e^{i(kx-\omega t)} \rightarrow e^{i\phi}e^{i(kx-\omega t)}$
+- Simplifies many calculations
+
+Note: Take real part before computing intensities, since $|e^{i\theta}|^2 = 1$
+
+\subsection{Superposition}
+
+\subsubsection{Linear Superposition}
+
+For two sources producing fields $\vec{E}_1(\vec{x},t)$ and $\vec{E}_2(\vec{x},t)$:
+
+\[
+\vec{E}(\vec{x},t) = \vec{E}_1(\vec{x},t) + \vec{E}_2(\vec{x},t)
+\]
+
+This is valid in normal media far from saturation.
+
+\subsubsection{Huygens' Principle}
+Huygens' principle states that every point on a wavefront acts as a source of secondary spherical wavelets. The new wavefront after a time t is the envelope of these secondary wavelets.
+Key points:
+
+Each point on a wavefront is a source of secondary waves
+Secondary waves propagate in all directions with the same speed as the primary wave
+The new wavefront is the tangent surface to all secondary wavelets
+
+
+\subsubsection{Diffraction by an Aperture}
+Diffraction occurs when waves encounter an obstacle or opening. It's the apparent bending of waves around small obstacles or spreading out past small openings.
+\subsubsection{Fraunhofer Diffraction (2D)}
+Consider a monochromatic plane wave impinging on a slit of width 2a along the x-direction.
+Setup:
+
+Wave propagates in z-direction
+Slit width: 2a
+Observation point: $\vec{x} = (R\sin\theta, R\cos\theta)$
+
+Using Huygens' principle, we sum the contributions from all points in the slit:
+\[
+A(\vec{x},t) = \alpha \int_{-a}^{a} dx_0 \frac{1}{((\vec{x}-\vec{x_0})^2)^{1/4}} \cos(k\sqrt{(\vec{x}-\vec{x_0})^2} - \omega t)
+]\]
+Where $\alpha$ is the infinitesimal amplitude of each Huygens wave.
+\subsubsection{Far-field Approximation}
+In the far-field (Fraunhofer) limit where $R \gg a$:
+\[
+A(\vec{x},t) \approx \frac{\alpha}{\sqrt{R}} \int_{-a}^{a} dx_0 \cos(kR - kx_0\sin\theta - \omega t)
+\]
+Solving this integral leads to:
+\[
+A(\vec{x},t) = \frac{2a\alpha}{\sqrt{R}} \cos(kR - \omega t) \text{sinc}(ka\sin\theta)
+\]
+Where $\text{sinc}(u) = \frac{\sin(u)}{u}$
+\subsubsection{Interpretation}
+
+For $ka \ll 1$ (slit much smaller than wavelength):
+
+$\text{sinc}(ka\sin\theta) \approx 1$ for all $\theta$
+Behaves like a point source
+
+
+For $ka \gg 1$ (slit much larger than wavelength):
+
+Intensity is significant only when $ka\sin\theta \ll \pi$
+Light propagates mostly in the forward direction
+
+
+
+\subsection{Extension to 3D}
+For a circular aperture in 3D, the diffraction pattern is described by a Bessel function:
+\[
+A(\vec{x},t) \propto J_1(ka\sin\theta)
+\]
+Where $J_1$ is the Bessel function of the first kind of order 1.
+\subsubsection{Resolution and Rayleigh Criterion}
+The Rayleigh criterion for resolution states that two point sources are just resolvable when the central maximum of one diffraction pattern coincides with the first minimum of the other.
+For a circular aperture:
+\[
+\theta_{min} = 1.22 \frac{\lambda}{D}
+\]
+Where $D$ is the diameter of the aperture.
+This criterion sets the fundamental limit for the angular resolution of optical instruments like telescopes and microscopes.
 \end{multicols}
 \end{document}

@@ -1,0 +1,563 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Source: Dave Richeson (divisbyzero.com), Dickinson College
+% Version francaise par Vincent Pantaloni, prof.pantaloni.free.fr
+% Traduction, correction et adaptation à la typographie française.
+% 
+% Une anti-seche en deux pages pour une intro rapide ou un aide mémoire des différentes fonctions. A imprimer en recto verso par exemple.
+%
+% Feel free to distribute this example, but please keep the referral
+% to divisbyzero.com
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,11pt,portrait]{article}
+\usepackage{fontspec}
+\usepackage{microtype}
+
+\usepackage{amssymb,amsmath,amsthm,amsfonts}
+\usepackage{multicol,multirow}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage{microtype}
+\usepackage{url}
+\usepackage[landscape]{geometry}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{braket}
+
+\DeclareMathOperator{\sinc}{sinc}
+
+
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { 
+    \geometry{top=0.2cm,left=0.2cm,right=0.2cm,bottom=0.2cm}
+ }
+	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+		{\geometry{top=0.2cm,left=0.2cm,right=0.2cm,bottom=0.2cm} }
+		{\geometry{top=0.2cm,left=0.2cm,right=0.2cm,bottom=0.2cm} }
+	}
+\pagestyle{empty}
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                            {-.2ex plus -.2ex minus -.2ex}%
+                            {0.2ex plus .2ex}%
+                            {\normalfont\tiny\bfseries}}
+
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-0.5ex plus -.2ex minus -.2ex}%
+                                {0.3ex plus .1ex}%
+                                {\normalfont\footnotesize\bfseries}}
+
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-0.5ex plus -.2ex minus -.2ex}%
+                                {0.3ex plus .1ex}%
+                                {\normalfont\tiny\bfseries}}
+
+\makeatother
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+% -----------------------------------------------------------------------
+
+\begin{document}
+
+\raggedright
+\footnotesize
+
+\begin{multicols}{3}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\section{1. MF26}
+\subsection{McLaurin Expansion}
+
+$$
+\text{Taylor Series:} \sum_{i=0}^{\infty} \frac{f^n(a)}{n!}(x-a)^n \quad \text{for values around a}
+$$
+$$
+f(x) = f(0) + xf'(0) + O(x^2)
+$$
+$$
+(1+x)^n = 1 + nx + O(x^2)
+$$
+$$
+e^x = 1 + x + O(x^2) \quad \text{(all }x\text{)}
+$$
+$$
+\sin x = x - \frac{x^3}{3!} + O(x^5) \quad \text{(all }x\text{)}
+$$
+$$
+\cos x = 1 - \frac{x^2}{2!} + O(x^4) \quad \text{(all }x\text{)}
+$$
+$$
+\ln(1+x) = x - \frac{x^2}{2} + O(x^3) \quad (-1 < x \leq 1)
+$$
+$$
+\sqrt{1-x} = 1 - \frac{x}{2} + O(x^2) 
+$$
+\subsection{Trigonometry}
+$$
+\sin(A \pm B) \equiv \sin A \cos B \pm \cos A \sin B
+$$
+$$
+\cos(A \pm B) \equiv \cos A \cos B \mp \sin A \sin B
+$$
+$$
+\tan(A \pm B) \equiv \frac{\tan A \pm \tan B}{1 \mp \tan A \tan B}
+$$
+$$
+\sin 2A \equiv 2 \sin A \cos A
+$$
+$$
+\cos 2A \equiv \cos^2 A - \sin^2 A \equiv 2\cos^2 A - 1 \equiv 1 - 2\sin^2 A
+$$
+$$
+\tan 2A \equiv \frac{2 \tan A}{1 - \tan^2 A}
+$$
+$$
+\sin P + \sin Q \equiv 2 \sin \frac{1}{2}(P + Q) \cos \frac{1}{2}(P - Q)
+$$
+$$
+\sin P - \sin Q \equiv 2 \cos \frac{1}{2}(P + Q) \sin \frac{1}{2}(P - Q)
+$$
+$$
+\cos P + \cos Q \equiv 2 \cos \frac{1}{2}(P + Q) \cos \frac{1}{2}(P - Q)
+$$
+$$
+\cos P - \cos Q \equiv -2 \sin \frac{1}{2}(P + Q) \sin \frac{1}{2}(P - Q)
+$$
+\subsection{Complex notation}
+$e^{i\theta} = cos \theta + i sin \theta$, $\psi_x =cos(kx - \omega t) = Re(e^{i(kx - wt)})$
+$(x+iy)^*=x-iy,(e^{i\theta})^*=e^{-i\theta},|z|^2=z^*z$
+
+$e^{i\theta}+e^{-i\theta} = 2\cos(\theta),i=e^{i\frac{\pi}{2}}$
+\subsection{Dirac notation}
+$\braket{\psi_x|\psi_y} = \psi^*\cdot\psi,\,||\psi||^2=\braket{\psi_x|\psi_x}=\sum_k{|\psi_k|^2}$
+
+For $\{\ket{H},\ket{V\}}$ to be basis, $\braket{H|H}=1,\braket{V|V}=1\braket{H|V}=0$
+\section{2. Monochromatic Waves}
+E = hv, $c=v\lambda$ $\omega=2\pi v$, $c = 2.998\times10^ 8m/s$
+
+Monochromatic: single color $\rightarrow$ wave has a single frequency.
+
+
+\subsection{Space Dependence}
+\subsubsection{1D Monochromatic Waves}
+Time dependence: $\cos(\omega t + \varphi)$
+
+Space and time dependence:
+$\cos(kx - \omega t + \varphi),$
+where $k$ is the wave number:
+\[
+k = \frac{\omega}{c} = \frac{2\pi}{\lambda}.
+\]
+The minus sign indicates that the wave moves to the right (positive direction).
+
+\subsubsection{3D Monochromatic Waves}
+\begin{itemize}
+    \item \textbf{Plane wave}: $\cos(\vec{k}\cdot\vec{x} - \omega t + \varphi)$.
+    \begin{itemize}
+        \item Wavefronts are planes; propagates eternally from $-\infty$ to $\infty$ in the direction $\hat{e_k}$.
+        \item The space vibrates in unison in the perpendicular direction to $\hat{e_k}$.
+    \end{itemize}
+    \item \textbf{Spherical wave}: 
+    $A(r(\overrightarrow{x})) \, cos(kr(\overrightarrow{x}) - \omega t + \varphi$)
+    
+    where $k$ is the wave number and $r(\vec{x})$ is the distance of $\vec{x}$ from the center $\vec{x_0}$ where the wave originates.
+    \[
+    r(\vec{x}) = \sqrt{(x - x_0)^2 + (y - y_0)^2 + (z - z_0)^2}
+    \]
+    For 3D, $A(r(\vec{x})) = \frac{A_0}{\sqrt{4\pi}\,r(\vec{x})}$
+    For 2D, $A(r(\vec{x})) = \frac{A_0}{\sqrt{2\pi\,r(\vec{x})}}$
+    \item wave fronts are surfaces of constant $r$, or spheres centered at $\vec{x_0}$
+\end{itemize}
+
+\subsection{Electric field}
+Polarisation for a monochromatic plane wave -> let direction of propagation be $\hat{e_z}$ 
+\begin{itemize}
+    \item Linear polarisation $\rightarrow$ electric field oscillates along a given direction $\theta$
+    
+    $\overrightarrow{E}(\overrightarrow{x},t) = E_0 \hat{e_\theta} cos(kz - \omega t)$, where $\theta' = \theta  + \pi$ defines the same polarisation as $\theta$
+    \item Circular polarisation $\rightarrow$ electric field rotates around propagation  axis,
+    
+    $\vec{E}(\vec{x},t) = E_0 \left[\cos(kz - \omega t)\hat{e}_\theta \pm \sin(kz - \omega t)\hat{e}_{\theta+\pi/2}\right]$ Right handed if it rotates clockwise (+), left-handed if it rotates counterclockwise (-) with reference to axis of propagation
+    \item elliptical polarisation $\rightarrow$ more general $\overrightarrow{E}(\overrightarrow{x},t) = E_0 [cos(kx - \omega t)\hat{e_\theta} \pm sin(kz - \omega t + \varphi)\hat{e}_{\theta+\pi/2}]$; circular is recovered if $\varphi = \mp \frac{\pi}{2}$, linear is recovered if $\varphi = 0$ and along the direction $\frac{1}{\sqrt2}(\hat{e_{\theta}} + \hat{e_{\theta + \pi/2}})$
+\end{itemize}
+Intensity: $I(\hat{x},t)$ = $\overrightarrow{E}(\overrightarrow{x},t)\cdot\overrightarrow{E}(\overrightarrow{x},t)$ and energy density is $\epsilon_0I(\overrightarrow{x},t)$
+
+\subsection{Fraunhofer Diffraction}
+The monochromatic plane wave impinging on a slit, with wave propagating in $\hat{z}$ direction, slit of width $2a$ along the $\hat{x}$ direction.
+
+For 2D spherical wave for $\hat{x} = (x,z)$:
+$$
+\frac{1}{\sqrt{2\pi r(\vec{x})}}
+$$
+
+At position:
+$$
+\vec{x} = (R\sin\theta, R\cos\theta)
+$$
+
+Circular wave emanates from any $\vec{x}_0$ in the slit (where $x_0$ is bounded between $-a$ and $a$); small change in amplitude of the wave is denoted as $dA = \alpha dx_0$, with $\alpha$ denoted as the infinitesimal amplitude of each Huygens wave.
+
+Amplitude of the wave at position $\vec{x}$ and time $t$ is:
+$$
+A(\vec{x},t) = \frac{\alpha}{\sqrt{2\pi}}\int_{-a}^{a} dx_0 \frac{\cos(k\sqrt{(\vec{x} - \vec{x}_0)^2}-\omega t)}{\sqrt{(\vec{x} - \vec{x}_0)^2}}
+$$
+As such, in far field the amplitude of the field at any position and time is given by $A(\vec{x},t) = 2a\alpha \frac{1}{\sqrt{2\pi}R} \cos(kR - \omega t) \sinc(ka\sin\theta)$ cos term means we have a spherical wave with source at the origin and of amplitude $$2a\alpha$$,and the sinc term refers to he wavelength of the light as compared to a, with no reference to R (for small terms of a, we have a point-like silt (sinc 0) = 1; for large terms of ka, we have destructive interference everywhere but in the forward direction.
+\subsection{Rayleigh criterion for resolution} - distinguish two sources of light where two sources are seperated by distance $q$, and observer is situated at distance $R$ with instrument of aperture $2a$ - limit is when the peak of one source is at the first 0 of the diffraction pattern of the other, with the diffraction limit of $q = 1.22 \frac{R \lambda} {2a}$
+
+\section{3. Propagation of light in media}
+Refractive index has to do with the interaction of light with the atoms in the medium -> light impinges on atoms, makes electrons vibrate and this vibration of charges emits light. 
+Driven damped oscillator is $\frac{d^2}{dt^2} z(t) + \gamma \frac{d}{dt}z(t) + \omega_0^2 z(t) = F' e^{-i\omega t}$ with $F' = F/m$, with ansatz of $z(t) = A(\omega) e^{i(-\omega t + \varphi(\omega)}$
+Total phase accumulated when wave travels in distance x in the medium is $\varphi(w)x/a$, where $a$ is the typical distance between atoms. Delay accumulated after many atoms is the image of the slowing down of the wave and is the origin of hte refractive index; we get  $n(\omega) - 1 = \frac{\phi(\omega)}{\omega c/a}$, where $n(\omega)$ is the frequency-dependent refractive index of the material,$\phi(\omega)$ is the frequency-dependent dielectric function of the material,$\omega$ is the angular frequency of the electromagnetic wave,$c$ is the speed of light in a vacuum
+and $a$ is a material-dependent constant
+\subsection{Interfaces}
+Laws of reflection: $\theta_r$ = $\theta_i$, Snell's Law is $n_T sin \theta_t = n_i sin \theta_i$ (refraction), total internal reflection occurs at $sin \theta_i^{TIR} = \frac{n_t}{n_i}$
+\subsection{Snell's Law} - idea of light choosing path of shortest time
+\subsection{Propagation in non-solid media} - rayleigh scattering if size of a scatter is smaller than $1/10$ of the wavelength, mie scattering is size of a scatterer is similar to the wavelength, geometric scattering if scatterer is bigger than the wavelength
+
+\section{4. Detecting and emitting light}
+\subsection{Sources of light}
+Physical mechanisms for emission of light: motion of a charge (thermal fluctuations and voltages) and change of internal energy levels (Transitions between discrete energy levels produce very narrow, single-frequency emission. In contrast, ionization followed by recapture leads to a broader spectrum, though still narrower than motional broadening, because the ionized electron interacts with a continuum of frequencies before being recaptured)
+\subsection{Blackbody radiation}
+sources of light are blackbodies at thermal equilibrium at temperature $T$. blackbody absorbs all incident electromagnetic radiation. At thermal equilibrium, blackbody emits radiation with equation (energy density per volume and per wavelength) $u_\lambda(\lambda) = \frac{8\pi h c}{\lambda^5} \frac{1}{\exp\left(\frac{hc}{\lambda k_B T}\right) - 1}$, for energy density spectrum density spectrum (energy per volume and per frequency( is $u_\nu(\nu) = \frac{8 \pi h \nu^3}{c^3} \frac{1}{\exp\left( \frac{h\nu}{k_B T} \right) - 1}$
+speed of light - 3 x $10^6$ m/s, h = 6.6 * $10^-34$ Js, Boltzmann constant  = 1.38 * $10^-23$ J/K.
+
+Blackbody sources have a broad spectrum peaked at $\lambda_{peak} = 2898/T$ (Wien's law) Examples include stars - sun looks white because all visible frequencies are present, hotter ones peak in UV and look blue
+
+\subsection{Lasers} laser beam propagating along positive z direction as $\mathbf{f}(\mathbf{x}, t) \propto G(x, y) \cos(kz - \omega t + \varphi(t))$
+
+\subsection{Detection of light}
+proportional regime - photocurrent proportional to intensity of light impinging on it; single-photon regime means a single photo-electron triggers electric current. signal of a proprotional detector proportional to the intensity of the light impinging on it over a time interval (time resolution of the detector) $
+P_{\text{det}}(t) \propto \int_t^{t + \Delta t} I(\mathbf{x}_0, t) \, dt
+$, with the time resolution $\Delta t$ being much longer than the period of the light wave. As such, signal of the detector would only record average intensity $
+\psi(x,t) = \alpha e^{i(kx - \omega t)} \quad \Rightarrow \quad P_{\text{det}}(t) \propto |\alpha|^2
+$
+\subsection{Linear devices}
+devices that do not mix frequencies and do not change intensity
+, let $
+G(y,z) e^{i(kx - \omega t)} \equiv \psi_x, \quad G(x,z) e^{i(ky - \omega t)} \equiv \psi_y
+$
+
+To introduce a \textbf{phase} on a beam, let light pass through a material with n > 1, input-output transformation will be $\psi_x \overset{\varphi}{\rightarrow} e^{i\varphi(\omega, L)} \psi_x$, where $\varphi(\omega, L) = 2\pi (\Delta l (\omega,L))/\lambda$; change in phase is due to the extra optical path length $\Delta l$ introduced by the medium. 
+
+For \textbf{Beam splitters}, they have two input ports and two output ports; when light enters from one input ports, a fraction is transmitted and the other fraction is reflected.
+$$\psi_x \rightarrow t \psi_x + r \psi_y, \quad \psi_y \rightarrow t \psi_y - r \psi_x \quad \text{for real version}$$ 
+$$\psi_x \rightarrow t \psi_x + ir \psi_y, \quad \psi_y \rightarrow t \psi_y + ir \psi_x\quad \text{for symmetric}$$
+
+\textbf{Birefringent devices} are such that the refractive index depends on the polarization, with two \textbf{orthogonal polarizations} with different indices. with input of a monochromatic plane wave propagating along x and polarized in an arbitrary direction in your,z plane, when passed through birefringent material of thickness L, we have
+$$\psi_x \left[ \hat{\alpha}_o \hat{e_o} + \hat{\beta}_e \hat{e_e} \right] \rightarrow \psi_x [\hat{\alpha} e^{i\varphi_o} \hat{e_o} + \hat{\beta} e^{i\varphi_e} \hat{e_e}]$$ with $\varphi_{o,e}$ for the corresponding refractive index, and the change depends on the difference $\Delta n = n_e - n_o$, giving $\hat{\alpha} e^{i\varphi_o} \hat{e_o} + \hat{\beta} e^{i\varphi_e} \hat{e_e} = e^{i\varphi_o} \left( \hat{\alpha} \hat{e_o} + \hat{\beta} e^{i\delta} \hat{e_e} \right)$ with $
+\delta(\omega) = \frac{2\pi \Delta n(\omega) L}{\lambda}, \quad \Delta n(\omega) = n_e(\omega) - n_o(\omega)$.
+
+\textbf{Mirror Transformations}
+$$\psi_x\overset{\text{mirror}}{\rightarrow}i\psi_y,\,\psi_y\overset{\text{mirror}}{\rightarrow}i\psi_x$$
+
+Popular devices include $\lambda / 2$ plate, where L is chosen such that $\Delta n(\omega)L = \lambda /2$, giving $\delta = \pi$ and polarisation is $\psi_x \left[ \hat{\alpha} \hat{e_o} + \hat{\beta} \hat{e_e} \right] \rightarrow \psi_x \left[ \hat{\alpha} \hat{e_o} - \hat{\beta} \hat{e_e} \right]$ (used to rotate linear polarisations) and $\lambda / 4$ plate, where L is chosen such that $\Delta n(\omega)L = \lambda /4$, giving $\delta = \pi / 2$ and polarisation is $\psi_x \left[ \hat{\alpha} \hat{e_o} + \hat{\beta} \hat{e_e} \right] \rightarrow \psi_x \left[ \hat{\alpha} \hat{e_o} - i \beta \hat{e_e} \right]$ (generate circularly/elliptical polarised beams)
+
+
+\section{Interferometry}
+\subsection{Young's double silt}
+a plane wave hitting a screen with 2 apertues of size 2a at a distance 2D. 
+$\frac{1}{\sqrt{2\pi} \left( (\overrightarrow{x} - \overrightarrow{x_0})^2 \right)^{1/4}}, \quad e^{i \mathbf{k} \sqrt{(\mathbf{x} - \mathbf{x_0})^2} - \omega t} \approx \frac{1}{\sqrt{2 \pi R}} e^{i(kR - \omega t)- i k x_0 \sin \theta} $. With assumption that the two apertures are point like, by Huygen's principle, each aperture creates a circular wave. At a given position $\overrightarrow{x} = (R sin \theta, R cos \theta$, total amplitude of the wave time t is $A(\mathbf{x}, t) \propto \frac{e^{i(kR - \omega t)} \left( e^{-ikD \sin \theta} + e^{ikD \sin \theta} \right)}{\sqrt{2\pi R^2}} = \frac{2}{\sqrt{2 \pi R}} e^{i(kR - \omega t)} \cos(kD \sin \theta)$, with assumption that the distance between the silts to be significantly larger than the wavelength (kD $>>$ 1), in any direction such that $kD sin \theta = m \pi$, amplitude is the sum of amplitudes (constructive interference); if $kD sin \theta = \pi / 2 + m\pi$, we have zero amplitude. 
+To add the finite aperture \( 2a \) of the slits, we can first take the two spherical waves emanating from one point in each slit, at \( (+ (D + x_0), 0, 0) \) and \( (- (D + x_0), 0, 0) \). The sum of these two waves is identical to the expression (5.2), only with \( D \) replaced by \( D + x_0 \). Then, we integrate this two-wave sum over \( x_0 \in [-a, a] \). The total amplitude is: $A(\mathbf{x}, t) = \frac{2\alpha}{\sqrt{2\pi R}} e^{i(kR - \omega t)} \int_{-a}^{a} dx_0 \cos \left[k(D + x_0) \sin \theta \right]$ $->$ $
+A(\mathbf{x}, t) = \frac{4\alpha}{\sqrt{2\pi R}} e^{i(kR - \omega t)} \cos \left(kD \sin \theta \right) \, \text{sinc}(ka \sin \theta)$
+
+Base spherical wave of $\frac{1}{\sqrt{2 \pi R}} cos (kR - \omega t)$ remains, but amplitudes depend on $\theta$ and are
+One slit: $2a\alpha \, \text{sinc}(ka \sin \theta)$
+Two slits: $4a\alpha \, \text{sinc}(ka \sin \theta) \cos \left[kD \sin \theta \right]$
+
+The factor \( \text{sinc}(ka \sin \theta) \) represents the diffraction pattern from the slit. In the case of two slits, we also have the interference term \( \cos(kD \sin \theta) \).
+
+\subsection{Amplitude Splitting interfermetry} - idea is to superpose a beam of light at different times (measure relative phases) - Mach-Zehnder interferometer works by either inserting a birefringent medium or increasing physica, with phase delay of $\varphi = 2 \pi \frac{\Delta l}{\lambda} = \omega \Delta \tau$ describing a differnece in optical path $\Delta l$ or a time delay $\Delta \tau$
+
+With a balanced beam-splitter, power detected at the output ports is related to the phase delay \( \phi \) as follows:$P_{\text{det},x} \propto \cos^2 \left( \frac{\phi}{2} \right), \quad P_{\text{det},y} \propto \sin^2 \left( \frac{\phi}{2} \right) 
+$
+
+Thus, by knowing the difference in optimal path, we can retrieve the wavelength. Interferometry provides information on the wavelength/frequency is encoded in the amplitudes of the output waves.
+For  \( \psi_x \) and \( \psi_y \), we find the following expressions, up to a global phase factor \( -e^{i\phi} \):
+
+$\text{Output port x: } \quad \frac{1}{2} \left[ \Psi(t') + \Psi(t' - \Delta \tau) \right]$
+
+and
+$\text{Output port y: } \quad \frac{1}{2} \left[ \Psi(t') - \Psi(t' - \Delta \tau) \right]$
+
+where \( \Psi \) is the wave at the input and \( t' = t - \ell/c \) is the time at the output port, with \( \ell \) being the optical length of the interferometer without the delay. As expected, the effect of the interferometer is to compare the input wave at two different times, superposing points separated by \( \Delta \tau \).
+
+\subsection{Michelson Interferometer} - easdier to align, as the variable part is a mirror that can be moved, current Light Interferometer Gravitational-Wave Observatory consists of two such Michelson interferometer. Once we have caliberated the wavelength of a source using known delays, we can use interferometry to \textbf{measure distances} that are fractions of the wavelength.
+
+\section{6. Other kinds of waves}
+\subsection{Non-monochromatic 1D waves} - refers to waves of different frequencies
+when we superimpose two monochromatic plane waves at different frequencies, then we have $\psi(x,t) = A \cos(k_1 x - \omega_1 t + \phi_1) + A \cos(k_2 x - \omega_2 t + \phi_2)$
+where \( A \) is the amplitude, \( k_1 \) and \( k_2 \) are the wave numbers, \( \omega_1 \) and \( \omega_2 \) are the angular frequencies, and \( \phi_1 \) and \( \phi_2 \) are the phases of the two waves.
+
+Using the trigonometric identity for the sum of cosines:
+$\cos(a) + \cos(b) = 2 \cos\left( \frac{a + b}{2} \right) \cos\left( \frac{a - b}{2} \right)$,
+we can rewrite the expression for \( \psi(x,t) \) as:
+
+$\psi(x,t) = 2A \cos\left(K_+ x - \Omega_+ t + \varphi_+\right) \cos\left(K_- x - \Omega_- t + \varphi_-\right)$
+
+where the new variables are defined as:
+$K_{\pm} = \frac{k_1 \pm k_2}{2}, \quad \Omega_{\pm} = \frac{\omega_1 \pm \omega_2}{2}$
+$\quad \varphi{\pm} = \frac{\varphi \pm \varphi}{2}$, $\omega_i = c|k_i|$. We perceive the new wave as a higher frequency wave modulated by a wave of lower frequency (known as frequency modulation or beat). \textbf{co-propagating waves} -> signs of the two waves are the same, $\Omega_\sigma = c|K_\sigma|$ holds. For \textbf{counter-propagating waves}, where $k_2 = -k_1$ we obtain a stationary wave. \textbf{proportional detection of more than one frequency}-> $
+P_{\text{det}}(t) = \int_{t}^{t + \Delta t} [ A_1 \cos(k_1 x - \omega_1 t) + A_2 \cos(k_2 x - \omega_2 t + \phi) ]^2 \, dt = A_1^2 \cos^2(k_1 x - \omega_1 t) + A_2^2 \cos^2(k_2 x - \omega_2 t + \phi) + A_1 A_2 \int_{t}^{t + \Delta t} [ \cos( (k_1 + k_2)x - (\omega_1 + \omega_2)t + \phi ) + \cos( (k_1 - k_2)x - (\omega_1 - \omega_2)t - \phi ) ] , dt$
+
+\subsection{Gaussian wavepacket in vacuum}
+$\psi(x,t) \propto e^{-k^2(x-ct)^2/2} cos(k_{0}x-\omega_{0}t)$, where $\omega_{0} = c|k_{0}|$ and bounded where $|k_0| >> k$. Complex version is $\psi(x,t) \propto e^{-k^2(x-ct)^2/2}e^{i(k_{0}x-\omega_{0}t}$. Frequency spectrum of Gaussian wave packet uses a Fourier transform , where it abides by the relationship $\psi(k) \propto e^{-\frac{(k - k_0)^2}{2 \kappa^2}}$. When propagating in a medium with an index of refraction, we decompose wavepacket to monochromatic waves and let every wave evolve as it should.
+
+\subsection{velocities based on dispersion relation}
+dispersion relation is the relation between frequency $\overrightarrow{k}(\omega)$ and wave-vector. for light, it is $|\overrightarrow{k}(\omega)| = \frac{n(\omega)\omega}{c}$, of which we can derive: 1) phase velocity, defined for each value of k $v_\varphi(k) = \frac{\omega}{k}$ and is velocity at which a point of the cosine wave moves, and 2) group velocity, defined around a value of k with $v_g(k) = \frac{d\omega(k)}{dk}$, which is the velocity of the envelop of wavepacket.
+
+\subsection{coherence} - stability in time of the relationship between two points of the wave; 2 notions: longitudinal (look at relation between two time phases) and transverse (relation between two different x values). \textbf{longitudinal} is typically done with an interferometer, and so outgoing amplitude is $0.5 [\Phi(t')+\Phi(t' - \Delta \tau)]$, where $\Phi$ is the equation of the wave packet. Power detected by the \( x \)-output port is proportional to: $
+P_{\text{det},x}(t) \propto \int_t^{t+\Delta t} \left( |\Psi(t)|^2 + |\Psi(t - \Delta \tau)|^2 + 2 \, \text{Re}(\Psi(t)^* \Psi(t - \Delta \tau)) \right) dt$, power detected by the \( y \)-output port is proportional to:
+$P_{\text{det},y}(t) \propto \int_t^{t + \Delta t} \left( |\Psi(t)|^2 + |\Psi(t - \Delta \tau)|^2 - 2 \, \text{Re}(\Psi(t)^* \Psi(t - \Delta \tau)) \right) dt$
+The difference between the detected powers is given by:
+$\Delta P = P_{\text{det},x}(t) - P_{\text{det},y}(t) \propto \int_t^{t + \Delta t} \text{Re}(\Psi(t)^* \Psi(t - \Delta \tau)) dt$. If $\Delta \tau$ is large such that the two do not overlap, coherence is 0. Coherence time is the value of $\Delta_\tau$ for which the interference term disappear.
+\textbf{Transverse coherence} - similar to setups of double-silt experiment, where if the impinging wave has a varying additional transverse phase $\varphi(x)$ and if the wavefront that impinges on the silts has transverse phase fluctuations, we have $A(\mathbf{x}, t) \propto \frac{1}{\sqrt{2 \pi R}} \left( e^{i(kR - \omega t)} e^{-ikD \sin \theta + \phi(D, t)} + e^{ikD \sin \theta + \phi(-D, t)} \right)$, where the parenthesis become $\cos(kD \sin \theta) \left( e^{i \phi(D, t)} + e^{i \phi(-D, t)} \right) - i \sin(kD \sin \theta) \left( e^{i \phi(D, t)} - e^{i \phi(-D, t)} \right)$. if the phases at the two points fluctate enough, average will wash out over the resolution time, and interference term $cos(kD sin\theta$ will not be visibible -> young's interferometer can be used to assess stability of the wavefront of the impinging wave (varying D (silt distance) can allow one to define \textbf{transverse coherence length} 2D at which the interference disappears due to phase fluctuations.
+
+\section{7. History}
+\subsection{Romer's Story}
+Observation:
+When moving towards Jupiter, the duration of Io's eclipse is shorter.When moving away from Jupiter, the duration of Io's eclipse is longer.
+Explanation:
+By taking the difference between these times, Romer estimated that light would take about 22 minutes to travel a distance equal to the diameter of Earth's orbit around the Sun. This gives a speed of 2.27$\times10^8$m/s
+
+\subsection{Fizeau's Story}
+Fizeau used a toothed wheel to measure the speed of light. Light would travel out a gap in the teeth of the wheel and would travel distance d and reflected by a mirror. $c=n_{teeth}\times2d\times v_{rotation}=3.13\times10^8$m/s
+
+\subsection{Ether}
+Waves were believed to only pass through a medium, therefore ether.
+
+Problems:
+\begin{itemize}
+    \item Light is so fast that the medium must be rigid. 
+    \item Ether must be moving relative to the earth, therefore, light will travel with different speeds (swimmer and river analogy, pythagoras). However, Michelson-Morley experiment proved otherwise. An interferometer was rotated to find a change in phase (change in speed). None was found.
+\end{itemize}
+
+\section{Special Relativity}
+\subsection{Einstein's Derivation}
+Use drawings. Moving train thought experiment. In Galilean relativity, $t_1=t_2$. In special relativity, $ct_1=d_1,\,ct_2=d_2$.
+\subsection{Objections}
+\begin{itemize}
+    \item Why light? Isn't there something faster? No; exceeding speed of light breaks causality.
+    \item Rigid rod. Push one end other end move immediately? No; local perturbations propagate at speed of sound
+\end{itemize}
+\subsection{Lorentz Transformations}
+Inertial frame $\rightarrow$ coordinate system with constant velocity (a=0).
+
+Set of inertial frames $\rightarrow$ A set of inertial frames is a set of frames that share the same set of inertial
+motions (i.e. if a motion is inertial in one of the frames, it is inertial in all the others too).
+\subsubsection{Transformations:}
+\begin{itemize}
+    \item Translations in space: $\vec{x} \longrightarrow \vec{x}' = \vec{x} - \vec{a}$
+    \item Rotations in space, around a fixed axis: ${x} \longrightarrow \vec{x}' = R(\hat{n}, -\alpha)\vec{x}$ where R is an orthogonal matrix.
+    \item Translations in time, by a fixed amount $\tau\text{: }t \longrightarrow t' = t - \tau$
+    \item "Boosts", i.e. translations in space with constant velocity. Changing reference to another velocity (shear transformation, t stays the same, x moves).
+    $$
+    \begin{aligned}
+    \vec{x} &\longrightarrow \vec{x}' = \vec{x} - \vec{u}t \\
+    t &\longrightarrow t' = t
+    \end{aligned} \quad [\text{Galilean}]
+    $$
+    \item Lorentz boost, need to consider invariance of the speed of light.
+    $$
+    |\vec{x}_A - \vec{x}_B|^2 - c^2(t_A - t_B)^2 = 0 \text{ in any frame (light cone).}
+    $$
+    $$
+    \begin{aligned}
+    x &\longrightarrow x' = x \\
+    y &\longrightarrow y' = y \\
+    z &\longrightarrow z' = \gamma_u(z - \beta_u ct) \\
+    ct &\longrightarrow ct' = \gamma_u(ct - \beta_u z)
+    \end{aligned}
+    \quad \text{with } \beta_u \equiv \frac{u}{c}, \gamma_u \equiv \frac{1}{\sqrt{1-u^2/c^2}}
+    $$
+
+These are affine transformations, which preserve: Parallel lines remain parallel,
+Ratios of distances along parallel lines,
+Ratios of areas
+
+\section*{Consequences of relativity}
+
+\textbf{Length Contraction:} $L = \frac{1}{\gamma_u}\tilde{L}$ with $\tilde{L}$ being length at rest
+
+\textbf{Time dilation:} $\Delta t = \gamma_u\Delta\tilde{t}$ with $\Delta\tilde{t}$ being duration at rest frame
+
+\textbf{Relativistic doppler:} 
+\begin{itemize}
+\item Moving away, red-shifted ($\lambda \uparrow$):
+\item Moving towards, blue-shifted ($\lambda \downarrow$):
+\end{itemize}
+$$\lambda = \sqrt{\frac{1 + \beta_u}{1 - \beta_u}}\tilde{\lambda} \qquad \nu = \sqrt{\frac{1 - \beta_u}{1 + \beta_u}}\tilde{\nu}$$
+
+\section*{Quantum Mechanics}
+\textbf{Quantized Blackbody:}
+$$u_\nu(\nu)d\nu = \varepsilon_T(\nu)\frac{N(\nu,d\nu)}{V}$$
+with $\varepsilon_T(\nu)$: average energy of a wave of frequency $\nu$ at equilibrium
+$N(\nu,d\nu)$: number of waves of frequency between $\nu$ and $\nu + d\nu$
+\subsubsection{N waves}
+At equilibrium, only stationary waves are allowed ($\psi(x=0)=\psi(x=L)=0$), for box of side length L. (1D, for 3D introduce y and z)
+
+Solution is: $\psi(x, y, z) \propto \sin(k_{n_1}x) \sin(k_{n_2}y) \sin(k_{n_3}z), \qquad k_n = \frac{\pi n}{L}, \quad n \in \mathbb{N}.$
+
+To count the number of waves that satisfy the equation becomes a solution to (which is the number of points that fall within circles of v and v+dv radii):
+$$
+n_1^2 + n_2^2 + n_3^2 = \left(\frac{2L}{c}\nu\right)^2
+$$
+This has a geometric interpretation (Figure 9.2, right): we want to know how many points of a cubic lattice fit within a spherical shell of radius 2Lc ν and thickness 2Lc dν, in the first quadrant since nj ≥ 0. Since L >> $\lambda$, this can be approximated by finding volume of the slice. All in all,
+$$
+N(\nu,d\nu) = 2 \times \left(\frac{1}{8}4\pi n^2 dn\right) = \frac{8\pi L^3}{c^3}\nu^2d\nu.
+$$
+
+\subsubsection{Avg E of waves}
+The equipartition theorem gives: $\varepsilon_T(\nu) = k_B T$
+Substituting gives the Rayleigh-Jeans formula: $u_\nu(\nu) = \frac{8\pi}{c^3}\nu^2 k_B$
+
+When v$\rightarrow\infty$, spectral density blows up to infinity. This is resolved with quantum theory, which postulates that the energy of a wave of frequency ν can only take the values nhν where n is a positive integer. This gives the final eq:
+$$
+\varepsilon_T(\nu) = \frac{h\nu}{e^{h\nu/k_B T} - 1}
+$$
+\subsection{History}
+Quantum phenomena:
+\begin{itemize}
+    \item Photoelectric effect. Observation: Amount of electrons emitted varied with frequency of light, not intensity. Explanation: Light imparts discrete amount of energy (hv) when it impinges on metal.
+    \item Specific heat.
+    \item Hydrogen emission spectra. lol
+\end{itemize}
+\end{itemize}
+
+\section{10. My first quantum phenomena}
+Polarization - direction of electric field's oscillation
+Polarizer - acts as a filter, transmitting only light polarized in certain directions, only components parallel to the vertical axis of the polarizer pass through, perpendicular components will be reflected as heat, governed by law of conservation of energy $I = I_T + I_R -> I cos^2 \alpha + I sin^2 \alpha$ (Malus' Law) For \textbf{series} of 3 polarizers, we can have $I_2= I_1 cos^2(\alpha)$ and $I_3 = I_2 cos^2(\beta - \alpha)$, where $\alpha$ is angle of orientation of the second with regard to the first and $\beta$ is angle of orientation of the third wrt. first.
+
+\subsection{Vector notation}
+$\hat{e_V}$ and $\hat{e_H}$ represent vertical and horizontal direction and describe the line by which the electric field oscillates; can describe polarization of an electric field as $\hat{e_\alpha} = cos \alpha \hat{e_H} + sin \alpha \hat{e_V}$; orthogonal polarization is described by $\hat{e_\alpha + \frac{\pi}{2}} = -sin \alpha \hat{e_H} + cos \alpha \hat{e_V}$. Polarization rotators can complement polarizing beam-splitters to measure polarization along any arbitrary axis.
+
+\subsection{Polarization of One Photon}
+In a polarized beam, each photon must have same polarization,but we use Dirac notation instead. $\ket{H}$ = $\begin{pmatrix}
+1 \\
+0
+\end{pmatrix}$ and $\ket{V}$ = $\begin{pmatrix}
+    0 \\ 
+    1
+\end{pmatrix}$, $\ket{\alpha} = cos\alpha\ket{H} + sin\alpha\ket{V} = \begin{pmatrix}
+    \cos \alpha \\ 
+    \sin \alpha
+\end{pmatrix}$, $cos \alpha$ is scalar product of $\ket{\alpha}$ and $\ket{H}$, can be written as $\braket{\alpha|H} = cos \alpha$ and $\braket{\alpha|V} = sin \alpha$. $\braket{H|H},\braket{V|V} = 1,\braket{H|V} = 0$. For a single photon, $cos^2 \alpha$ represent the probability of a photon being transmitted. Probability of a photon passing through horizontal polarizer is $|\braket{H|\alpha}|^2$,passing through vertical polarizer is $|\braket{V|\alpha}|^2$,$|\braket{H|\alpha}|^2 + |\braket{V|\alpha}|^2 = 1$ (born's rule for probabilities)
+
+\subsection{Two Photons}
+We have 4 possible scenarios, $\ket{H} \otimes \ket{H}$,
+$\ket{V} \otimes \ket{V}$
+$\ket{H} \otimes \ket{V}$
+$\ket{V} \otimes \ket{H}$
+Then we have $\ket{H} \otimes \ket{H} = \begin{pmatrix}
+    1 \\ 
+    0
+\end{pmatrix} \otimes 
+\begin{pmatrix}
+    1 \\ 
+    0
+\end{pmatrix} = 
+\begin{pmatrix}
+    1 \begin{pmatrix}
+        1 \\ 
+        0
+    \end{pmatrix} \\
+
+    0 \begin{pmatrix}
+        1 \\ 
+        0
+    \end{pmatrix}
+\end{pmatrix} 
+= 
+\begin{pmatrix}
+    1 \\
+    0 \\
+    0 \\ 
+    0
+\end{pmatrix}$
+General case for two photos: 
+$\ket{\psi} = a \ket{HH} + b \ket{HV} + c \ket{VH} + d \ket{VV}$, where $|a|^2 + |b|^2 + |c|^2 + |d|^2 = 1$ is the normalization conditions. If we cannot describe the state as product of two independent states, such states are considered \textit{entangled}.
+
+\subsection{Transformation of states}
+Assumptions made: optimal measurement process, reversible transformations
+\textbf{All} transformations are linear and have property of unitarity.
+Linear transformations:
+for all pairs of vectors ${\ket{\psi_1,\psi_2}}$, transformation T is such that $T(\psi_1 + \psi_2) = T(\psi_1) + T(\psi_2)$
+Unitary transformation if it preserves the scalar product of any two vectors 
+$\braket{\phi_1|\phi_2} = \braket{U(\phi_1) | U(\phi_2)}$ -> rough proof: if scalar product decreases, contradicts optimal measurement assumption. if scalar product increases, implies there is a transformation for which scalar product decreases.
+
+
+\subsection{Quantum Correlations and Bell's Inequality} We have a source emitting two photons, with Alice and Bob each receiving one of these photons (photon A and B respectively) -> meausre polarization of respective photons along directions $\alpha$ and $\beta$, described by bases $\ket{+ \alpha} = cos \alpha \ket{H} + sin \alpha \ket{V} $ and $\ket{- \alpha} = cos \alpha \ket{V} + sin \alpha \ket{H} $ for Alice, and $\ket{+ \beta} = cos \beta \ket{H} + sin \beta \ket{V} $ and $\ket{- \beta} = cos \beta \ket{V} + sin \beta \ket{H} $ for Bob. If A or B measure $\ket{+\alpha}$ or $\ket{+\beta}$, will record as $r_A(\alpha)= +1$ or $r_B(\beta) = +1$, otherwise if it is recorded as negative, recorded as -1. Four outcomes labelled as (++),(+-),(-+) and (--).
+For a source of \textbf{entangled} state of $\ket{\Psi^-} = \frac{1}{\sqrt{2}(\ket{H}\ket{V} - \ket{V}\ket{H}}$, probabilities given by 
+$P(++ | \alpha, \beta) = P(--| \alpha, \beta) = \frac{1}{4}[1 - cos2(\alpha - \beta)]$ and $P(+- | \alpha, \beta) = P(-+| \alpha, \beta) = \frac{1}{4}[1 + cos2(\alpha - \beta)]$
+Probability of each outcome is \textbf{dependent} on both measurement bases, which is strange because of its entangled nature. Correlation coefficient (measure of the degree by which the photons are correlated) is defined $E(\alpha, \beta) = P(r_A(\alpha) = r_B(\beta)) - P(r_A(\alpha) \neq r_B(\beta))$ of range -1 (opposite outcomes)to +1 (same outcomes). For the entangled state, correlation coefficient is $E(\alpha, \beta) = -cos[2(\alpha - \beta)]$. Classical mechanisms to explain this include communication (photon being measured sending information about measurement and outcome to other photon), and pre-established agreement (pre-arranged outcomes for each possible measurements). \textbf{Bell's Theorem} modifies original experiment by allowing Alice and Bob to choose between two different measurement bases: $\alpha$ and $\alpha'$ for Alice, and $\beta$ and $\beta'$ for Bob. We suppose photons exchange agreement at source about the outcome they would produce (hidden variable $\lambda = {\lambda_A, \lambda_B}$, where $\lambda_A = {r_A(\alpha),r_A(\alpha')} and \lambda_B = {r_B(\beta), r_B(\beta')}$, forming expression $S(\lambda) = (r_A(\alpha) + r_A(\alpha'))r_B(\beta) + (r_A(\alpha) - r_A(\alpha'))r_B(\beta')$.However, for every possible $\lambda$, S($\lambda$) can only produce 2 or -2. If Alice and Bob repeat experiment with many pairs of photons,can determine average value of S with $<S> = E(\alpha,\beta) + E(\alpha',\beta) + E(\alpha, \beta') - E(\alpha',\beta')$. Since <S> is the average value of a number that can take +2 or -2, we thus have |<S>| $\leq$ 2 (Bell's Inequality). But, can be proven that Bell's inequality can be violated for some measurement bases, thus we cannot say hidden variables exist.
+
+\subsection{One-photon state}
+$$\ket{\psi}\equiv\ket{\alpha,\varphi}=\begin{bmatrix}
+    \cos{\alpha} \\
+     e^{i\varphi}\sin{\alpha}
+\end{bmatrix} \quad \text{, one generic photon} $$
+$$\ket{\psi^{\perp}}\equiv\ket{\alpha + \frac{\pi}{2},\varphi}=\begin{bmatrix}
+    -\sin{\alpha} \\
+     e^{i\varphi}\cos{\alpha}
+\end{bmatrix} \quad \text{, orthogonal state} $$
+
+
+\subsection{Statistics of Bell's Experiments}
+Possible results (a,b) of the measurement are associated to following states:
+
+(+,+): $\ket{\alpha} \otimes \ket{\beta} = \begin{pmatrix}
+    c_\alpha c_\beta \\
+    c_\alpha s_\beta \\
+    s_\alpha c_\beta \\
+    s_\alpha s_\beta
+\end{pmatrix}$
+
+(+,-): $\ket{\alpha} \otimes \ket{\beta + \pi/2} = \begin{pmatrix}
+    -c_\alpha s_\beta \\
+    c_\alpha c_\beta \\
+    -s_\alpha s_\beta \\
+    s_\alpha c_\beta
+\end{pmatrix}$
+
+(-,+): $\ket{\alpha + \pi/2} \otimes \ket{\beta } = \begin{pmatrix}
+    -s_\alpha c_\beta \\
+    -s_\alpha s_\beta \\
+    c_\alpha c_\beta \\
+    c_\alpha s_\beta
+\end{pmatrix}$
+
+(-,-): $\ket{\alpha + \pi/2} \otimes \ket{\beta + \pi/2 } = \begin{pmatrix}
+    s_\alpha s_\beta \\
+    -s_\alpha c_\beta \\
+    -c_\alpha s_\beta \\
+    c_\alpha c_\beta
+\end{pmatrix}$. 
+
+Ex: for a state $\Phi^+ = \frac{1}{\sqrt{2}}(\ket{HH} + \ket{VV}) = \frac{1}{\sqrt{2}}\begin{pmatrix}
+    1 \\
+    0 \\
+    0 \\
+    1 \\
+\end{pmatrix}$, probability of the four outcomes are
+\begin{itemize}
+    \item P(+,+) = $\frac{1}{2}|c_\alpha c_\beta + s_\alpha s_\beta|^2 = \frac{1}{2}cos^2(\alpha - \beta)$
+
+    \item P(+,-) = $\frac{1}{2}|-c_\alpha s_\beta + s_\alpha c_\beta|^2 = \frac{1}{2}sin^2(\alpha - \beta)$
+
+    \item P(-,+) = $\frac{1}{2}|-s_\alpha c_\beta -c_\alpha s_\beta|^2 = P(+,-)$
+
+    \item P(-,-) = $\frac{1}{2}|s_\alpha s_\beta +c_\alpha c_\beta|^2 = P(+,+)$
+\end{itemize}
+Correlation is given by $C(\alpha, \beta) = \sum_{a,b \in {-1,+1}} ab P(a,b) = cos[2(\alpha - \beta)]$
+
+\end{multicols} 
+\end{document}
